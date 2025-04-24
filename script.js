@@ -1,26 +1,26 @@
 let allQuestions = [];
-let shownQuestions = [];
+let shownQuestions = []; // 질문 히스토리 저장 배열
 
 async function loadGroup() {
   try {
-    const res = await fetch('questions.json');
+    const res = await fetch("questions.json");
     const data = await res.json();
     allQuestions = [...data.questions]; // 모든 질문 불러오기
     shownQuestions = [];
 
     // 👉 제목 업데이트
-    const group = document.getElementById('groupInput').value;
-    document.querySelector('h1').textContent = `${group}조 랜덤 질문`;
+    const group = document.getElementById("groupInput").value;
+    document.querySelector("h1").textContent = `${group}조 랜덤 질문`;
 
     // 👉 입력창 숨기기
-    document.getElementById('inputArea').style.display = 'none';
+    document.getElementById("inputArea").style.display = "none";
 
-    const el = document.getElementById('question');
+    const el = document.getElementById("question");
     el.textContent = "질문을 불러왔습니다. 버튼을 눌러 주세요.";
-    el.classList.remove('show');
+    el.classList.remove("show");
 
-    document.getElementById('nextBtn').style.display = 'inline-block';
-    document.getElementById('historyBtn').style.display = 'inline-block';
+    document.getElementById("nextBtn").style.display = "inline-block";
+    document.getElementById("historyBtn").style.display = "inline-block";
   } catch (err) {
     console.error("질문 로딩 오류:", err);
     alert("질문 파일을 불러오는 데 실패했습니다.");
@@ -37,15 +37,27 @@ function showRandomQuestion() {
   const randomIndex = Math.floor(Math.random() * allQuestions.length);
   const randomQuestion = allQuestions.splice(randomIndex, 1)[0]; // 질문을 하나씩 제거하면서 보여줌
 
-  shownQuestions.push(randomQuestion);
+  const questionNumber = shownQuestions.length + 1; // 질문 번호 생성
 
-  const el = document.getElementById('question');
+  shownQuestions.push({ questionNumber, question: randomQuestion }); // 히스토리 배열에 추가
+
+  const el = document.getElementById("question");
   el.textContent = randomQuestion;
-  el.classList.add('show');
+  el.classList.add("show");
 }
 
 function showHistory() {
-  const historyEl = document.getElementById('question');
-  historyEl.textContent = shownQuestions.join("\n\n");
-  historyEl.classList.add('show');
+  const historyEl = document.getElementById("question");
+  historyEl.innerHTML = "<h2>질문 히스토리</h2>"; // 히스토리 제목 추가
+
+  if (shownQuestions.length === 0) {
+    historyEl.innerHTML += "<p>질문이 없습니다. 질문을 먼저 확인해 주세요.</p>";
+  } else {
+    // 각 질문별로 번호와 내용 정리하여 히스토리 표시
+    shownQuestions.forEach((item) => {
+      historyEl.innerHTML += `<p>${item.questionNumber}질문</strong> ${item.question}</p>`;
+    });
+  }
+
+  historyEl.classList.add("show");
 }
