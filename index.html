@@ -3,42 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>조별 질문 생성기</title>
+    <title>질문 랜덤 시스템</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div class="container">
-      <h1>조별 랜덤 질문</h1>
-
+      <h1>조 입력</h1>
       <div id="inputArea">
-        <input
-          type="number"
-          id="groupInput"
-          placeholder="조 번호 입력"
-          min="1"
-        />
-        <button onclick="loadGroup()">질문 불러오기</button>
+        <input type="text" id="groupInput" placeholder="조 번호을 입력하세요" />
+        <button onclick="loadGroup()">입력</button>
       </div>
-      <div id="question" class="fade"></div>
-
-      <button id="historyBtn" onclick="showHistory()" style="display: none">
-        이전 질문 보기</button
-      ><button
-        id="nextBtn"
-        onclick="showRandomQuestion()"
-        style="display: none"
-      >
-        다음 질문
-      </button>
-    </div>
-
-    <!-- Modal -->
-    <div id="modal" class="modal">
-      <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <h3>이전 질문</h3>
-        <ul id="modalHistoryList"></ul>
-      </div>
+      <h2 id="question"></h2>
+      <button id="historyBtn" onclick="showHistory()">질문 히스토리</button>
+      <button id="nextBtn" onclick="showRandomQuestion()">다음 질문</button>
+      <!-- <div id="history"></div> -->
     </div>
 
     <script src="script.js"></script>
