@@ -87,3 +87,42 @@ button:hover {
   color: #333;
   cursor: pointer;
 }
+
+#question {
+  font-size: 1.2em;
+  margin: 20px 0;
+  opacity: 0;
+  transition: opacity 0.5s ease-in;
+}
+
+#question.show {
+  opacity: 1;
+}
+
+#historyBtn,
+#nextBtn {
+  display: none;
+  margin-top: 20px;
+}
+
+#history {
+  padding: 20px;
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  margin-top: 20px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+#history h2 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+#history p {
+  margin-bottom: 10px;
+}
+
+#history p strong {
+  color: #2c3e50;
+}
